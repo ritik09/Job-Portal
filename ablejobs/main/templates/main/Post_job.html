@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Post A Job </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light" style="background-color:#DCDCDC;">
+                <div class="btn-group" style = "margin-left : 85%" >
+                    <button type="button" class="btn"> Company PROFILE </button>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a href="/company_profile" class="dropdown-item"> {{user.name}} </a><hr>
+                      <div class="dropdown-divider"></div>
+                      <a href="/logout" class="dropdown-item"> Logout </a> 
+                  </div>
+                </div>  
+                          
+    </nav>
+        <div class="container">
+                <h2 id="std-head" style="color: rgb(106, 209, 243); padding-left: 5%;padding-right: 2%"> Post a Job </h2>
+                  <hr>
+                <div class="row">                  
+                  
+                  <div class="col-md-7 personal-info">              
+                    <h4> Fill the Required Fields </h4>
+            
+                    <form method="POST" class="form-horizontal" role="form">
+                        {% csrf_token %}
+
+                        <!-- Roles -->
+
+                        <div class="form-group">
+                          <label for="id_category" class="col-lg-3 control-label">Role:</label> 
+                          <div class="col-lg-8">
+                            
+                          <select class="form-control" name="role" id="id_category">
+                            
+                            <option value="none" selected disabled hidden>Select an option </option>
+
+                            {% for cat in categories %}
+                              <option value = "{{cat.id}}">{{cat.category_name}}</option>
+                            {% endfor %}
+
+                          </select class="form-control">  
+
+                        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                         <label for="id_role" class="col-lg-3 control-label">Phone:</label> 
+                        <div class="col-lg-8">
+                          <input class="form-control" type="text" name="phone" maxlength="12" required="" id="id_role">
+                        </div>
+                         </div>
+                      
+                      <div class="form-group">
+                       <label for="id_location" class="col-lg-3 control-label">Location:</label> 
+                       <div class="col-lg-8">
+                        <select class="form-control" name="location" id="id_location">
+
+                          <option value="none" selected disabled hidden>Select an option </option>
+
+                          {% for loc in locations %}
+                            <option value = "{{loc.id}}">{{loc.location_name}}</option>
+                          {% endfor %}
+                        
+                        </select>
+
+                      </div>
+                    </div>
+                  
+                  
+                       <div class="form-group">
+                       <label for="id_content" class="col-lg-4 control-label">Description:</label> 
+                       <div class="col-lg-8">
+                        <textarea class="form-control" name="job_description" cols="40" rows="10" required="" id="id_content">
+
+                        </textarea>
+                      </div></div>
+                  
+                      <div class="form-group">
+                          <label class="col-md-3 control-label"></label>
+                          <div class="col-md-8">
+                              <button style="background-color:#0356fc; color:white" class="btn btn-outline-info" type="submit">Submit</button>
+                            <a href="/company_profile/" style="background-color:red; color:white" class="btn btn-outline-info">Cancel</a>
+                          </div>
+                        </div>
+
+                      </form>
+            
+                  </div>
+              </div>
+
+        </div>
+</body>
+</html>

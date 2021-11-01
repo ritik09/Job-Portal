@@ -1,0 +1,73 @@
+{%load static%}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Post A Job </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+</head>
+
+
+<body style = " left: 0;
+    top: 0;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1rem">
+    <nav class="navbar navbar navbar-light navbar-expand-lg static-top" style="background-color:#DCDCDC">
+        <div class="btn-group" style = "margin-left: 90%">
+            <button type="button" class="btn "> MY PROFILE </button>
+            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a href="/company_profile" class="dropdown-item"> {{user.name}} </a><hr>
+                <a href="/post_job" class="dropdown-item">Post Your Jobs</a>
+                <div class="dropdown-divider"></div>
+                <a href="/logout" class="dropdown-item"> Logout </a>
+            </div>
+        </div>         
+    </nav>
+
+    {% block content %}
+
+        <div>
+            <h2 style="color: cornflowerblue;margin-top: 4%;">&nbsp&nbsp&nbsp&nbspPosted Jobs!</h2>
+            <hr>
+        </div>
+        <div>
+        {% for message in messages %}
+        <div class="message">
+        <h3 style="text-align: center; color:slateblue;">{{ message }}</h3>
+        <a href="#" class="del-msg"></a>
+        </div>
+        {% endfor %}
+        </div>
+
+    <div style = "display: grid; grid-template-columns: repeat(4, 1fr); gap: 3%;">
+    {% for product in jobs %}
+                
+        <div style = "position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color:#DCDCDC;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        cursor: pointer;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);">
+                <h1 style="font-family: montserrat">{{product.role}}</h1>
+                <h6>Location:  {{product.location}}</h4>              
+                <h6>Description: {{product.job_description}}</h4>
+            </div>
+    {% endfor %}
+    </div>
+    {% endblock %}
+</body>
